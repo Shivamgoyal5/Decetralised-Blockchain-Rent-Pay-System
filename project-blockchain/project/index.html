@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Decentralized Rent Payment</title>
+    <style>
+        body {
+            background-color: #121212;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: #E0E0E0;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #333;
+            padding: 15px 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.8);
+        }
+
+        .navbar a {
+            color: #E0E0E0;
+            text-decoration: none;
+            padding: 14px 20px;
+            font-size: 1.1em;
+            transition: color 0.3s;
+        }
+
+        .navbar a:hover {
+            color: #FFD700;
+        }
+
+        .main-content {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+            margin-bottom: 50px;
+            position: relative; /* Allows absolute positioning of child elements */
+        }
+
+        .photo-container {
+            position: absolute; /* Allows control over position */
+            top: 10%; /* Adjust vertical position */
+        }
+
+        .photo-left {
+            left: 50px; /* Position to the left side */
+        }
+
+        .photo-right {
+            right: 50px; /* Position to the right side */
+        }
+
+        .circle-photo {
+            width: 250px; /* Adjust the size of the photo */
+            height: 250px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 5px solid #1E90FF; /* Border color matching the theme */
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .circle-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 30px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+            box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(10px);
+            position: relative;
+        }
+
+        .heading-container {
+            text-align: center;
+            margin: 30px auto; /* Center the heading */
+            position: relative;
+            z-index: 2000; /* Ensures the heading stays on top */
+        }
+
+        h1 {
+            font-size: 3em;
+            color: #FFD700; /* Bright color for visibility */
+            text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.8);
+            background-color: #333; /* Background to make it pop */
+            padding: 15px;
+            border-radius: 10px;
+            display: inline-block;
+        }
+
+        h2 {
+            margin-bottom: 15px;
+            font-size: 1.8em;
+            color: #1E90FF; /* Dodger Blue color */
+            border-bottom: 2px solid #1E90FF;
+            padding-bottom: 5px;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.7);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-size: 1.1em;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border-radius: 5px;
+            border: none;
+            margin-top: 5px;
+            background-color: #333;
+            color: white;
+            font-size: 1em;
+            box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border: 2px solid #1E90FF;
+            box-shadow: 0 0 10px #1E90FF;
+        }
+
+        .form-group button {
+            width: 100%;
+            padding: 12px;
+            border-radius: 8px;
+            border: none;
+            background-color: #4CAF50;
+            color: white;
+            cursor: pointer;
+            font-size: 1.2em;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.3s;
+            box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .form-group button:hover {
+            background-color: #45a049;
+            transform: scale(1.05);
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        #result {
+            margin-top: 25px;
+            padding: 15px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            color: #FFD700;
+            font-size: 1.1em;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="#addPayer">Add Payer</a>
+        <a href="#addToIllegalList">Add to Illegal List</a>
+        <a href="#recordPayment">Record Payment</a>
+        <a href="#reviewAppeal">Review Appeal</a>
+        <a href="#submitAppeal">Submit Appeal</a>
+        <a href="#getLegalList">Get Legal List</a>
+        <a href="#getIllegalList">Get Illegal List</a>
+        <a href="#getPayerDetails">Get Payer Details</a>
+    </div>
+
+    <!-- Heading outside the main container -->
+    <div class="heading-container">
+        <h1>Decentralized Rent Payment</h1>
+    </div>
+
+    <div class="main-content">
+        <div class="photo-container photo-left">
+            <!-- Left side photo -->
+            <div class="circle-photo">
+                <img src="Background.png" alt="Photo">
+            </div>
+        </div>
+
+        <div class="container">
+            <!-- Add Payer Section -->
+            <div id="addPayer">
+                <h2>Add Payer</h2>
+                <div class="form-group">
+                    <label for="payerAddress">Payer Address:</label>
+                    <input type="text" id="payerAddress" required>
+                </div>
+                <div class="form-group">
+                    <label for="payerName">Payer Name:</label>
+                    <input type="text" id="payerName" required>
+                </div>
+                <div class="form-group">
+                    <label for="roomNumber">Room Number:</label>
+                    <input type="number" id="roomNumber" required>
+                </div>
+                <div class="form-group">
+                    <label for="startDate">Start Date (UNIX timestamp):</label>
+                    <input type="number" id="startDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="endDate">End Date (UNIX timestamp):</label>
+                    <input type="number" id="endDate" required>
+                </div>
+                <div class="form-group">
+                    <button id="addPayerButton">Add Payer</button>
+                </div>
+            </div>
+
+            <div id="addToIllegalList">
+                <h2>Add to Illegal List</h2>
+                <div class="form-group">
+                    <label for="illegalPayerAddress">Payer Address:</label>
+                    <input type="text" id="illegalPayerAddress" required>
+                </div>
+                <div class="form-group">
+                    <button id="addToIllegalButton">Add to Illegal List</button>
+                </div>
+            </div>
+            
+            <div id="recordPayment">
+                <h2>Record Payment</h2>
+                <div class="form-group">
+                    <label for="paymentPayerAddress">Payer Address:</label>
+                    <input type="text" id="paymentPayerAddress" required>
+                </div>
+                <div class="form-group">
+                    <label for="amount">Amount:</label>
+                    <input type="number" id="amount" required>
+                </div>
+                <div class="form-group">
+                    <label for="paymentDate">Payment Date (UNIX timestamp):</label>
+                    <input type="number" id="paymentDate" required>
+                </div>
+                <div class="form-group">
+                    <label for="onTime">On Time:</label>
+                    <input type="checkbox" id="onTime">
+                </div>
+                <div class="form-group">
+                    <label for="gracePeriod">Grace Period (seconds):</label>
+                    <input type="number" id="gracePeriod" required>
+                </div>
+                <div class="form-group">
+                    <label for="paid">Paid:</label>
+                    <input type="checkbox" id="paid">
+                </div>
+                <div class="form-group">
+                    <button id="recordPaymentButton">Record Payment</button>
+                </div>
+            </div>
+            
+            <div id="reviewAppeal">
+                <h2>Review Appeal</h2>
+                <div class="form-group">
+                    <label for="appealPayerAddress">Payer Address:</label>
+                    <input type="text" id="appealPayerAddress" required>
+                </div>
+                <div class="form-group">
+                    <label for="removeFromIllegal">Remove from Illegal List:</label>
+                    <input type="checkbox" id="removeFromIllegal">
+                </div>
+                <div class="form-group">
+                    <button id="reviewAppealButton">Review Appeal</button>
+                </div>
+            </div>
+            
+            <div id="submitAppeal">
+                <h2>Submit Appeal</h2>
+                <div class="form-group">
+                    <button id="submitAppealButton">Submit Appeal</button>
+                </div>
+            </div>
+            
+            <div id="getLegalList">
+                <h2>Get Legal List</h2>
+                <div class="form-group">
+                    <button id="getLegalListButton">Get Legal List</button>
+                </div>
+            </div>
+            
+            <div id="getIllegalList">
+                <h2>Get Illegal List</h2>
+                <div class="form-group">
+                    <button id="getIllegalListButton">Get Illegal List</button>
+                </div>
+            </div>
+            
+            <div id="getPayerDetails">
+                <h2>Get Payer Details</h2>
+                <div class="form-group">
+                    <label for="getPayerAddress">Payer Address:</label>
+                    <input type="text" id="getPayerAddress" required>
+                </div>
+                <div class="form-group">
+                    <button id="getPayerDetailsButton">Get Payer Details</button>
+                </div>
+            </div>
+
+            <div id="result"></div>
+        </div>
+
+        <div class="photo-container photo-right">
+            <!-- Right side photo -->
+            <div class="circle-photo">
+                <img src="Background.png" alt="Photo">
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/gh/ethereum/web3.js/dist/web3.min.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
