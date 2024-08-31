@@ -1,7 +1,7 @@
 ### README.md
 
 # RentPay Full Stack Project
-![alt text](<Screenshot 2024-08-25 122209.png>)
+![alt text](<Logo.png>)
 ## Vision
 The **RentPay Full Stack Full Stack Project**  is designed to revolutionize the rental payment system by providing a transparent, decentralized, and automated way to manage tenant payments and track contractual obligations. The full stack solution integrates a smart contract with a web interface to handle payments efficiently, maintain clear records, and ensure fair treatment through an appeal mechanism for late payments. The system categorizes tenants into legal and illegal lists based on their payment behavior and provides mechanisms for appeals and owner interventions.
 
